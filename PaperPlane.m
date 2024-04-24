@@ -59,3 +59,4 @@
 	subplot(2,2,4)
 	plot(ta,xa(:,4),tb,xb(:,4),tc,xc(:,4),td,xd(:,4))
 	xlabel('Time, s'), ylabel('Range, m'), grid
+    legend('Case 1', 'Case 2', 'Case 3', 'Case 4');
