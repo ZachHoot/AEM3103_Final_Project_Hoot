@@ -27,7 +27,46 @@
 %% Case A
 
 % Single Parameter Variation
+	xo		=	[3.55;Gam;H;R];        %Nominal Case
+	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[7.5;Gam;H;R];         %Max Case
+	[ta2,xa2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[2.0;Gam;H;R];         %Low Case
+	[ta3,xa3]	=	ode23('EqMotion',tspan,xo);
 
+    subplot(2,1,1);
+    title('Change of Velocity');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xa1(:,4),xa1(:,3), 'k');
+    plot(xa2(:,4), xa2(:,3),'g');
+    plot(xa3(:,4), xa3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
+	xo		=	[V;-0.18;H;R];        %Nominal Case
+	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[V;0.4;H;R];         %Max Case
+	[ta2,xa2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[V;-0.5;H;R];         %Low Case
+	[ta3,xa3]	=	ode23('EqMotion',tspan,xo);
+
+    subplot(2,1,2);
+    title('Change of flight angle');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xa1(:,4),xa1(:,3), 'k');
+    plot(xa2(:,4), xa2(:,3),'g');
+    plot(xa3(:,4), xa3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
 
 % Monte Carlo Variation
 
@@ -38,6 +77,7 @@
 %% Case B
 
 % Single Parameter Variation
+	xo		=	[V;0;H;R];
 
 
 % Monte Carlo Variation
@@ -50,6 +90,7 @@
 %% Case C
 
 % Single Parameter Variation
+	xo		=	[1.5*V;Gam;H;R];
 
 
 % Monte Carlo Variation
@@ -61,6 +102,7 @@
 %% Case D
 
 % Single Parameter Variation
+	xo		=	[3*V;Gam;H;R];
 
 
 % Monte Carlo Variation
