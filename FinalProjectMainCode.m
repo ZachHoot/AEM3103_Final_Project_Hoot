@@ -69,7 +69,16 @@
     
 
 % Monte Carlo Variation
+randfa = zeros(100,1);
+randV = zeros(100,1);
 
+%function to generate random values for whole array
+for i = 1:100 
+    randfa(i) = -0.5 + (0.9 * rand(1));
+    randV(i) = 2 + (5.5 * rand(1));
+end
+disp(max(randV));
+disp(max(randfa));
 
 % Time derivative calculation and display
 
