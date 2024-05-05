@@ -22,7 +22,7 @@
 	R		=	0;			% Initial Range, m
 	to		=	0;			% Initial Time, sec
 	tf		=	6;			% Final Time, sec
-    tspan = [to tf];
+    tspan = (to:0.06:tf);
 
 %% Case A
 
@@ -34,6 +34,7 @@
 	xo		=	[2.0;Gam;H;R];         %Low Case
 	[ta3,xa3]	=	ode23('EqMotion',tspan,xo);
 
+    figure;
     subplot(2,1,1);
     title('Change of Velocity');
     ylabel('Height (m)');
@@ -77,8 +78,14 @@ for i = 1:100
     randfa(i) = -0.5 + (0.9 * rand(1));
     randV(i) = 2 + (5.5 * rand(1));
 end
-disp(max(randV));
-disp(max(randfa));
+figure;
+hold on;
+for i = 1:100
+	xo		=	[randV(i);randfa(i);H;R];
+	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
+    plot(xa1(:,4), xa1(:,3));
+    disp(length(ta1));
+end
 
 % Time derivative calculation and display
 
