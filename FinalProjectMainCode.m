@@ -1,4 +1,4 @@
-%% Final Project Document
+%% Final Project Main Document
 % Written by Zach Hoot
 % 4/22/24 - 5/6/24
 
@@ -115,10 +115,16 @@ drdt = center_num_der(ta1, xaR);
 figure;
 subplot(2,1,1);
 plot(ta1, dhdt);
+grid on;
 title('dH/dt (case A)');
+xlabel('Time (sec)');
+ylabel('Change in Height (m)');
 subplot(2,1,2);
 plot(ta1, drdt);
+grid on;
 title('dR/dt (case A)');
+xlabel('Time (sec)');
+ylabel('Change in Range (m)');
 
 %% Case B
 
