@@ -36,7 +36,7 @@
 
     figure;
     subplot(2,1,1);
-    title('Change of Velocity');
+    title('Change of Velocity (Case A)');
     ylabel('Height (m)');
     xlabel('Range (m)');
     hold on;
@@ -56,7 +56,7 @@
 	[ta3,xa3]	=	ode23('EqMotion',tspan,xo);
 
     subplot(2,1,2);
-    title('Change of flight angle');
+    title('Change of flight angle (Case A)');
     ylabel('Height (m)');
     xlabel('Range (m)');
     hold on;
@@ -82,6 +82,9 @@ for i = 1:100
 end
 figure;
 hold on;
+title('Monte Carlo Variation (Case A)');
+ylabel('Height (m)');
+xlabel('Range (m)');
 for i = 1:100
 	xo		=	[randV(i);randfa(i);H;R];
 	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
@@ -98,11 +101,14 @@ figure;
 hold on;
 grid on;
 plot(xaR,xaH, 'r');
+title('Concatenation and polyfit (Case A)');
+ylabel('Height (m)');
+xlabel('Range (m)');
 xaConcate = [ta1, xaR, xaH];
-
+%Polynomial fit function
 
 % Time derivative calculation and display
-
+% Search old notes to find best derivative function
 
 %% Case B
 
