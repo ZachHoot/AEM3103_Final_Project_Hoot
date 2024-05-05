@@ -331,15 +331,101 @@ ylabel('Change in Range (m)');
 %% Case D
 
 % Single Parameter Variation
-	xo		=	[3*V;Gam;H;R];
+	xo		=	[3*V;Gam;H;R];        %Nominal Case
+	[td1,xd1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[(3*7.5);Gam;H;R];         %Max Case
+	[td1,xd2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[(3*2.0);Gam;H;R];         %Low Case
+	[td1,xd3]	=	ode23('EqMotion',tspan,xo);
 
+    figure;
+    subplot(2,1,1);
+    title('Change of Velocity (Case D)');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xd1(:,4), xd1(:,3), 'k');
+    plot(xd2(:,4), xd2(:,3),'g');
+    plot(xd3(:,4), xd3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
+	xo		=	[3*V;-0.18;H;R];        %Nominal Case
+	[td1,xd1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[3*V;0.4;H;R];         %Max Case
+	[td1,xd2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[3*V;-0.5;H;R];         %Low Case
+	[td1,xd3]	=	ode23('EqMotion',tspan,xo);
+
+    subplot(2,1,2);
+    title('Change of flight angle (Case D)');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xd1(:,4),xd1(:,3), 'k');
+    plot(xd2(:,4), xd2(:,3),'g');
+    plot(xd3(:,4), xd3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
 
 % Monte Carlo Variation
+randfa = zeros(100,1);
+randV = zeros(100,1);
+xdStoreR = zeros(101,100);
+xdStoreH = zeros(101,100);
+tdStore = zeros(101,100);
+%function to generate random values for whole array
+for i = 1:100 
+    randfa(i) = -0.5 + (0.9 * rand(1));
+    randV(i) = 3*(2 + (5.5 * rand(1)));
+end
+figure;
+hold on;
+title('Monte Carlo Variation (Case D)');
+ylabel('Height (m)');
+xlabel('Range (m)');
+for i = 1:100
+	xo		=	[randV(i);randfa(i);H;R];
+	[td1,xd1]	=	ode23('EqMotion',tspan,xo);
+    plot(xd1(:,4), xd1(:,3));
+    xdStoreR(:,i) = xd1(:,4);
+    xdStoreH(:,i) = xd1(:,3);
+end
 
-
+% Concatenate 100 interations
+xdR = concatenate(xdStoreR, td1);
+xdH = concatenate(xdStoreH, td1);
+figure;
+hold on;
+grid on;
+plot(xdR,xdH, 'r');
+title('Concatenation and polyfit (Case D)');
+ylabel('Height (m)');
+xlabel('Range (m)');
+xcConcate = [td1, xdR, xdH];
+%Polynomial fit function
+p = polyfit(xdR, xdH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
+y_fit = polyval(p, xdR);
+plot(xdR, y_fit, '--k');
 % Time derivative calculation and display
 
-
-%% Display
-
-
+dhdt = center_num_der(td1, xdH);
+drdt = center_num_der(td1, xdR);
+figure;
+subplot(2,1,1);
+plot(td1, dhdt);
+grid on;
+title('dH/dt (case D)');
+xlabel('Time (sec)');
+ylabel('Change in Height (m)');
+subplot(2,1,2);
+plot(td1, drdt);
+grid on;
+title('dR/dt (case D)');
+xlabel('Time (sec)');
+ylabel('Change in Range (m)');
