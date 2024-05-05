@@ -130,6 +130,102 @@ ylabel('Change in Range (m)');
 
 % Single Parameter Variation
 	xo		=	[V;0;H;R];
+    [tb1,xb1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[7.5;0;H;R];         %Max Case
+	[tb1,xb2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[2.0;0;H;R];         %Low Case
+	[tb1,xb3]	=	ode23('EqMotion',tspan,xo);
+
+    figure;
+    subplot(2,1,1);
+    title('Change of Velocity (Case B)');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xb1(:,4),xb1(:,3), 'k');
+    plot(xb2(:,4), xb2(:,3),'g');
+    plot(xb3(:,4), xb3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
+	xo		=	[V;0;H;R];        %Nominal Case
+	[tb1,xb1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[V;0;H;R];         %Max Case
+	[tb1,xb2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[V;0;H;R];         %Low Case
+	[tb1,xb3]	=	ode23('EqMotion',tspan,xo);
+
+    subplot(2,1,2);
+    title('Change of flight angle (Case B)');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xb1(:,4),xb1(:,3), 'k');
+    plot(xb2(:,4), xb2(:,3),'g');
+    plot(xb3(:,4), xb3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
+
+% Monte Carlo Variation
+randV = zeros(100,1);
+xbStoreR = zeros(101,100);
+xbStoreH = zeros(101,100);
+tbStore = zeros(101,100);
+%function to generate random values for whole array
+for i = 1:100 
+    randV(i) = 2 + (5.5 * rand(1));
+end
+figure;
+hold on;
+title('Monte Carlo Variation (Case B)');
+ylabel('Height (m)');
+xlabel('Range (m)');
+for i = 1:100
+	xo		=	[randV(i);0;H;R];
+	[tb1,xb1]	=	ode23('EqMotion',tspan,xo);
+    plot(xb1(:,4), xb1(:,3));
+    xbStoreR(:,i) = xb1(:,4);
+    xbStoreH(:,i) = xb1(:,3);
+end
+
+% Concatenate 100 interations
+xbR = concatenate(xbStoreR, tb1);
+xbH = concatenate(xbStoreH, tb1);
+figure;
+hold on;
+grid on;
+plot(xbR,xbH, 'r');
+title('Concatenation and polyfit (Case B)');
+ylabel('Height (m)');
+xlabel('Range (m)');
+xbConcate = [tb1, xbR, xbH];
+%Polynomial fit function
+p = polyfit(xbR, xbH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
+y_fit = polyval(p, xbR);
+plot(xbR, y_fit, '--k');
+% Time derivative calculation and display
+
+dhdt = center_num_der(tb1, xbH);
+drdt = center_num_der(tb1, xbR);
+figure;
+subplot(2,1,1);
+plot(tb1, dhdt);
+grid on;
+title('dH/dt (Case B)');
+xlabel('Time (sec)');
+ylabel('Change in Height (m)');
+subplot(2,1,2);
+plot(tb1, drdt);
+grid on;
+title('dR/dt (Case B)');
+xlabel('Time (sec)');
+ylabel('Change in Range (m)');
+
 
 
 % Monte Carlo Variation
