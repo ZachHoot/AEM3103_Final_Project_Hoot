@@ -30,9 +30,9 @@
 	xo		=	[3.55;Gam;H;R];        %Nominal Case
 	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
 	xo		=	[7.5;Gam;H;R];         %Max Case
-	[ta2,xa2]	=	ode23('EqMotion',tspan,xo);
+	[ta1,xa2]	=	ode23('EqMotion',tspan,xo);
 	xo		=	[2.0;Gam;H;R];         %Low Case
-	[ta3,xa3]	=	ode23('EqMotion',tspan,xo);
+	[ta1,xa3]	=	ode23('EqMotion',tspan,xo);
 
     figure;
     subplot(2,1,1);
@@ -51,9 +51,9 @@
 	xo		=	[V;-0.18;H;R];        %Nominal Case
 	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
 	xo		=	[V;0.4;H;R];         %Max Case
-	[ta2,xa2]	=	ode23('EqMotion',tspan,xo);
+	[ta1,xa2]	=	ode23('EqMotion',tspan,xo);
 	xo		=	[V;-0.5;H;R];         %Low Case
-	[ta3,xa3]	=	ode23('EqMotion',tspan,xo);
+	[ta1,xa3]	=	ode23('EqMotion',tspan,xo);
 
     subplot(2,1,2);
     title('Change of flight angle (Case A)');
@@ -91,12 +91,11 @@ for i = 1:100
     plot(xa1(:,4), xa1(:,3));
     xaStoreR(:,i) = xa1(:,4);
     xaStoreH(:,i) = xa1(:,3);
-    taStore(:,i) = ta1;
 end
 
 % Concatenate 100 interations
-xaR = concatenate(xaStoreR, taStore);
-xaH = concatenate(xaStoreH, taStore);
+xaR = concatenate(xaStoreR, ta1);
+xaH = concatenate(xaStoreH, ta1);
 figure;
 hold on;
 grid on;
@@ -106,9 +105,20 @@ ylabel('Height (m)');
 xlabel('Range (m)');
 xaConcate = [ta1, xaR, xaH];
 %Polynomial fit function
-
+p = polyfit(xaR, xaH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
+y_fit = polyval(p, xaR);
+plot(xaR, y_fit, '--k');
 % Time derivative calculation and display
-% Search old notes to find best derivative function
+
+dhdt = center_num_der(ta1, xaH);
+drdt = center_num_der(ta1, xaR);
+figure;
+subplot(2,1,1);
+plot(ta1, dhdt);
+title('dH/dt (case A)');
+subplot(2,1,2);
+plot(ta1, drdt);
+title('dR/dt (case A)');
 
 %% Case B
 
