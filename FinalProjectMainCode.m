@@ -36,9 +36,9 @@
 
     figure;
     subplot(2,1,1);
-    title('Change of Velocity (Case A)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of Velocity (Case A)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xa1(:,4),xa1(:,3), 'k');
@@ -56,9 +56,9 @@
 	[ta1,xa3]	=	ode23('EqMotion',tspan,xo);
 
     subplot(2,1,2);
-    title('Change of flight angle (Case A)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of flight angle (Case A)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xa1(:,4),xa1(:,3), 'k');
@@ -82,9 +82,9 @@ for i = 1:100
 end
 figure;
 hold on;
-title('Monte Carlo Variation (Case A)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Monte Carlo Variation (Case A)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 for i = 1:100
 	xo		=	[randV(i);randfa(i);H;R];
 	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
@@ -100,9 +100,9 @@ figure;
 hold on;
 grid on;
 plot(xaR,xaH, 'r');
-title('Concatenation and polyfit (Case A)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Concatenation and polyfit (Case A)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 xaConcate = [ta1, xaR, xaH];
 %Polynomial fit function
 p = polyfit(xaR, xaH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
@@ -116,15 +116,15 @@ figure;
 subplot(2,1,1);
 plot(ta1, dhdt);
 grid on;
-title('dH/dt (case A)');
-xlabel('Time (sec)');
-ylabel('Change in Height (m)');
+title('dH/dt (case A)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
 subplot(2,1,2);
 plot(ta1, drdt);
 grid on;
-title('dR/dt (case A)');
-xlabel('Time (sec)');
-ylabel('Change in Range (m)');
+title('dR/dt (case A)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
 
 %% Case B
 
@@ -138,9 +138,9 @@ ylabel('Change in Range (m)');
 
     figure;
     subplot(2,1,1);
-    title('Change of Velocity (Case B)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of Velocity (Case B)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xb1(:,4),xb1(:,3), 'k');
@@ -158,9 +158,9 @@ ylabel('Change in Range (m)');
 	[tb1,xb3]	=	ode23('EqMotion',tspan,xo);
 
     subplot(2,1,2);
-    title('Change of flight angle (Case B)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of flight angle (Case B)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xb1(:,4),xb1(:,3), 'k');
@@ -182,9 +182,9 @@ for i = 1:100
 end
 figure;
 hold on;
-title('Monte Carlo Variation (Case B)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Monte Carlo Variation (Case B)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 for i = 1:100
 	xo		=	[randV(i);0;H;R];
 	[tb1,xb1]	=	ode23('EqMotion',tspan,xo);
@@ -200,9 +200,9 @@ figure;
 hold on;
 grid on;
 plot(xbR,xbH, 'r');
-title('Concatenation and polyfit (Case B)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Concatenation and polyfit (Case B)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 xbConcate = [tb1, xbR, xbH];
 %Polynomial fit function
 p = polyfit(xbR, xbH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
@@ -216,15 +216,15 @@ figure;
 subplot(2,1,1);
 plot(tb1, dhdt);
 grid on;
-title('dH/dt (Case B)');
-xlabel('Time (sec)');
-ylabel('Change in Height (m)');
+title('dH/dt (Case B)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
 subplot(2,1,2);
 plot(tb1, drdt);
 grid on;
-title('dR/dt (Case B)');
-xlabel('Time (sec)');
-ylabel('Change in Range (m)');
+title('dR/dt (Case B)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
 
 %% Case C
 
@@ -238,9 +238,9 @@ ylabel('Change in Range (m)');
 
     figure;
     subplot(2,1,1);
-    title('Change of Velocity (Case C)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of Velocity (Case C)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xc1(:,4), xc1(:,3), 'k');
@@ -258,9 +258,9 @@ ylabel('Change in Range (m)');
 	[tc1,xc3]	=	ode23('EqMotion',tspan,xo);
 
     subplot(2,1,2);
-    title('Change of flight angle (Case C)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of flight angle (Case C)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xc1(:,4),xc1(:,3), 'k');
@@ -284,9 +284,9 @@ for i = 1:100
 end
 figure;
 hold on;
-title('Monte Carlo Variation (Case C)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Monte Carlo Variation (Case C)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 for i = 1:100
 	xo		=	[randV(i);randfa(i);H;R];
 	[tc1,xc1]	=	ode23('EqMotion',tspan,xo);
@@ -302,12 +302,12 @@ figure;
 hold on;
 grid on;
 plot(xcR,xcH, 'r');
-title('Concatenation and polyfit (Case C)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Concatenation and polyfit (Case C)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 xcConcate = [tc1, xcR, xcH];
 %Polynomial fit function
-p = polyfit(xcR, xcH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
+p = polyfit(xcR, xcH, 7);    %chose 7 to try and fit the initial spike
 y_fit = polyval(p, xcR);
 plot(xcR, y_fit, '--k');
 % Time derivative calculation and display
@@ -318,15 +318,15 @@ figure;
 subplot(2,1,1);
 plot(tc1, dhdt);
 grid on;
-title('dH/dt (case C)');
-xlabel('Time (sec)');
-ylabel('Change in Height (m)');
+title('dH/dt (case C)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
 subplot(2,1,2);
 plot(tc1, drdt);
 grid on;
-title('dR/dt (case C)');
-xlabel('Time (sec)');
-ylabel('Change in Range (m)');
+title('dR/dt (case C)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
 
 %% Case D
 
@@ -340,9 +340,9 @@ ylabel('Change in Range (m)');
 
     figure;
     subplot(2,1,1);
-    title('Change of Velocity (Case D)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of Velocity (Case D)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xd1(:,4), xd1(:,3), 'k');
@@ -360,9 +360,9 @@ ylabel('Change in Range (m)');
 	[td1,xd3]	=	ode23('EqMotion',tspan,xo);
 
     subplot(2,1,2);
-    title('Change of flight angle (Case D)');
-    ylabel('Height (m)');
-    xlabel('Range (m)');
+    title('Change of flight angle (Case D)', 'FontSize', 18);
+    ylabel('Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
+    xlabel('Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
     hold on;
     grid on;
     plot(xd1(:,4),xd1(:,3), 'k');
@@ -386,9 +386,9 @@ for i = 1:100
 end
 figure;
 hold on;
-title('Monte Carlo Variation (Case D)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Monte Carlo Variation (Case D)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 for i = 1:100
 	xo		=	[randV(i);randfa(i);H;R];
 	[td1,xd1]	=	ode23('EqMotion',tspan,xo);
@@ -404,12 +404,12 @@ figure;
 hold on;
 grid on;
 plot(xdR,xdH, 'r');
-title('Concatenation and polyfit (Case D)');
-ylabel('Height (m)');
-xlabel('Range (m)');
+title('Concatenation and polyfit (Case D)', 'FontSize', 20);
+ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
+xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
 xcConcate = [td1, xdR, xdH];
 %Polynomial fit function
-p = polyfit(xdR, xdH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
+p = polyfit(xdR, xdH, 10);    %10 was chosen so that the loop would be accounted for
 y_fit = polyval(p, xdR);
 plot(xdR, y_fit, '--k');
 % Time derivative calculation and display
@@ -420,12 +420,12 @@ figure;
 subplot(2,1,1);
 plot(td1, dhdt);
 grid on;
-title('dH/dt (case D)');
-xlabel('Time (sec)');
-ylabel('Change in Height (m)');
+title('dH/dt (case D)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Height (m)', 'FontSize', 12, 'FontWeight', 'bold');
 subplot(2,1,2);
 plot(td1, drdt);
 grid on;
-title('dR/dt (case D)');
-xlabel('Time (sec)');
-ylabel('Change in Range (m)');
+title('dR/dt (case D)', 'FontSize', 18);
+xlabel('Time (sec)', 'FontSize', 12, 'FontWeight', 'bold');
+ylabel('Change in Range (m)', 'FontSize', 12, 'FontWeight', 'bold');
