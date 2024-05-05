@@ -226,26 +226,107 @@ title('dR/dt (Case B)');
 xlabel('Time (sec)');
 ylabel('Change in Range (m)');
 
-
-
-% Monte Carlo Variation
-
-
-% Time derivative calculation and display
-
-
-
 %% Case C
 
 % Single Parameter Variation
-	xo		=	[1.5*V;Gam;H;R];
+	xo		=	[1.5*V;Gam;H;R];        %Nominal Case
+	[tc1,xc1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[(1.5*7.5);Gam;H;R];         %Max Case
+	[tc1,xc2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[(1.5*2.0);Gam;H;R];         %Low Case
+	[tc1,xc3]	=	ode23('EqMotion',tspan,xo);
 
+    figure;
+    subplot(2,1,1);
+    title('Change of Velocity (Case C)');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xc1(:,4), xc1(:,3), 'k');
+    plot(xc2(:,4), xc2(:,3),'g');
+    plot(xc3(:,4), xc3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
+	xo		=	[1.5*V;-0.18;H;R];        %Nominal Case
+	[tc1,xc1]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[1.5*V;0.4;H;R];         %Max Case
+	[tc1,xc2]	=	ode23('EqMotion',tspan,xo);
+	xo		=	[1.5*V;-0.5;H;R];         %Low Case
+	[tc1,xc3]	=	ode23('EqMotion',tspan,xo);
+
+    subplot(2,1,2);
+    title('Change of flight angle (Case C)');
+    ylabel('Height (m)');
+    xlabel('Range (m)');
+    hold on;
+    grid on;
+    plot(xc1(:,4),xc1(:,3), 'k');
+    plot(xc2(:,4), xc2(:,3),'g');
+    plot(xc3(:,4), xc3(:,3),'r');
+    legend('Nominal', 'Max case', 'Min case');
+
+
+    
 
 % Monte Carlo Variation
+randfa = zeros(100,1);
+randV = zeros(100,1);
+xcStoreR = zeros(101,100);
+xcStoreH = zeros(101,100);
+tcStore = zeros(101,100);
+%function to generate random values for whole array
+for i = 1:100 
+    randfa(i) = -0.5 + (0.9 * rand(1));
+    randV(i) = 1.5*(2 + (5.5 * rand(1)));
+end
+figure;
+hold on;
+title('Monte Carlo Variation (Case C)');
+ylabel('Height (m)');
+xlabel('Range (m)');
+for i = 1:100
+	xo		=	[randV(i);randfa(i);H;R];
+	[tc1,xc1]	=	ode23('EqMotion',tspan,xo);
+    plot(xc1(:,4), xc1(:,3));
+    xcStoreR(:,i) = xc1(:,4);
+    xcStoreH(:,i) = xc1(:,3);
+end
 
-
+% Concatenate 100 interations
+xcR = concatenate(xcStoreR, tc1);
+xcH = concatenate(xcStoreH, tc1);
+figure;
+hold on;
+grid on;
+plot(xcR,xcH, 'r');
+title('Concatenation and polyfit (Case C)');
+ylabel('Height (m)');
+xlabel('Range (m)');
+xcConcate = [tc1, xcR, xcH];
+%Polynomial fit function
+p = polyfit(xcR, xcH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
+y_fit = polyval(p, xcR);
+plot(xcR, y_fit, '--k');
 % Time derivative calculation and display
 
+dhdt = center_num_der(tc1, xcH);
+drdt = center_num_der(tc1, xcR);
+figure;
+subplot(2,1,1);
+plot(tc1, dhdt);
+grid on;
+title('dH/dt (case C)');
+xlabel('Time (sec)');
+ylabel('Change in Height (m)');
+subplot(2,1,2);
+plot(tc1, drdt);
+grid on;
+title('dR/dt (case C)');
+xlabel('Time (sec)');
+ylabel('Change in Range (m)');
 
 %% Case D
 
