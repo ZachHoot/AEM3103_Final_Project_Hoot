@@ -72,7 +72,9 @@
 % Monte Carlo Variation
 randfa = zeros(100,1);
 randV = zeros(100,1);
-
+xaStoreR = zeros(101,100);
+xaStoreH = zeros(101,100);
+taStore = zeros(101,100);
 %function to generate random values for whole array
 for i = 1:100 
     randfa(i) = -0.5 + (0.9 * rand(1));
@@ -84,8 +86,20 @@ for i = 1:100
 	xo		=	[randV(i);randfa(i);H;R];
 	[ta1,xa1]	=	ode23('EqMotion',tspan,xo);
     plot(xa1(:,4), xa1(:,3));
-    disp(length(ta1));
+    xaStoreR(:,i) = xa1(:,4);
+    xaStoreH(:,i) = xa1(:,3);
+    taStore(:,i) = ta1;
 end
+
+% Concatenate 100 interations
+xaR = concatenate(xaStoreR, taStore);
+xaH = concatenate(xaStoreH, taStore);
+figure;
+hold on;
+grid on;
+plot(xaR,xaH, 'r');
+xaConcate = [ta1, xaR, xaH];
+
 
 % Time derivative calculation and display
 
