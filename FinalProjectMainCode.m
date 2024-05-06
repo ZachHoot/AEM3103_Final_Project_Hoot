@@ -100,7 +100,9 @@
     p = polyfit(xaR, xaH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
     y_fit = polyval(p, xaR);
     plot(xaR, y_fit, '--k'); %Dashed line for contrast
-    
+    errH1 = abs(max(y_fit-xaH)); %Error Calculation of polyfit model
+    fprintf('Error Height Case A: ')
+    disp(errH1);
 % Time derivative calculation and display
     dhdt = center_num_der(ta1, xaH);
     drdt = center_num_der(ta1, xaR);
@@ -191,6 +193,9 @@
     p = polyfit(xbR, xbH, 5);    %chose 5 because it seemed to produce the most acurate result without being to 'Exact'
     y_fit = polyval(p, xbR);
     plot(xbR, y_fit, '--k'); %Dashed line for contrast
+    errH2 = abs(max(y_fit-xbH)); %Error Calculation of polyfit model
+    fprintf('Error Height Case B: ')
+    disp(errH2);
 
 % Time derivative calculation and display 
     dhdt = center_num_der(tb1, xbH);
@@ -283,6 +288,9 @@
     p = polyfit(xcR, xcH, 7);    %chose 7 to try and fit the initial spike
     y_fit = polyval(p, xcR);
     plot(xcR, y_fit, '--k'); %Dashed line for contrast
+    errH3 = abs(max(y_fit-xcH)); %Error Calculation of polyfit model
+    fprintf('Error Height Case C: ')
+    disp(errH3);
 
 % Time derivative calculation and display
     dhdt = center_num_der(tc1, xcH);
@@ -353,7 +361,7 @@
     title('Monte Carlo Variation (Case D)', 'FontSize', 20);
     ylabel('Height (m)', 'FontSize', 14, 'FontWeight', 'bold');
     xlabel('Range (m)', 'FontSize', 14, 'FontWeight', 'bold');
-    for i = 1:100
+    for i = 1:100        %Variable reset needs to occur before each program execution to avoid bug that changes the size of td1 array
 	    xo		=	[randV(i);randfa(i);H;R];
 	    [td1,xd1]	=	ode23('EqMotion',tspan,xo);
         plot(xd1(:,4), xd1(:,3));
@@ -375,6 +383,9 @@
     p = polyfit(xdR, xdH, 10);    %10 was chosen so that the loop would be accounted for
     y_fit = polyval(p, xdR);
     plot(xdR, y_fit, '--k'); %Dashed line for contrast
+    errH4 = abs(max(y_fit-xdH)); %Error Calculation of polyfit model
+    fprintf('Error Height Case D: ')
+    disp(errH4);
 
 % Time derivative calculation and display
     dhdt = center_num_der(td1, xdH);
