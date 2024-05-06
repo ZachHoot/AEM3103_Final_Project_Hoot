@@ -31,4 +31,4 @@ By: Zach Hoot
 ![Case D, Figure 1](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/Figures/CaseD_Min_Max.pdf)
 ![Case D, Figure 2](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/Figures/CaseD_Monte_Carlo.pdf)
 ![Case D, Figure 3](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/Figures/CaseD_Concatenation_Polyfit.pdf)
-![Case D, Figure 4](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/Figures/CaseD_Time_Derivatives.pdf)
+![Case D, Figure 4](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/Figures/CaseD_Time_Derivatives.svg)
