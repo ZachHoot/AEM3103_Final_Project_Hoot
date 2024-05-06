@@ -7,11 +7,11 @@ By: Zach Hoot
 
 ## Code Listing
 
--[concatenate.m](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/concatenate.m)
+-[concatenate.m](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/concatenate.m): Funtion takes the 100 test cases (101x100 arrays) from Monte-Carlo variable variations and averages each time point and returns an array with just those 101 values
 
--[center_num_der.m](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/center_num_der.m)
+-[center_num_der.m](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/center_num_der.m): Function takes the height and range data calculated by concatenate.m and uses center difference method to calculate the derivative with respect to time of the range and height of the average resultant, while also using forward and backward distance method to calculate the first and last derivative values.
 
--[EqMotion.m](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/EqMotion.m)
+-[EqMotion.m](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/EqMotion.m): Supplies the differential equations of motion for the ode23 function to calculate the trajectory of the paper airplane.
 
 ## Figures and Descriptions
 
