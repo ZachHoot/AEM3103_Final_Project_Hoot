@@ -4,7 +4,7 @@ Final Project: AEM 3103 Spring 2024
 By: Zach Hoot
 
 ## Summary of Findings
- -![Variable Variation Table](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/Figures/AEM3103_Variable_Variation_Table_(Final_Project).svg)
+ -![Variable Variation Table]
 
   - Variations Studied: Case A was the general case were velocity and flight angle were varried within the given min/max range supplied by the test condition. Case B was a study of the variation resulting in a flight path angle of 0 radians and the velocity varrying within the same range as in Case A. Case C was to test changes resulting from taking the same conditions as case A and increasing the velocity 50%. Case D was similar to case C but instead of increasing the velocity 50%, it was increased 200% to better gauge the extreme case of what would occur should the velocity be significantly higher than the pre calculated ideal flight angle and velocity for maximum range.
     
