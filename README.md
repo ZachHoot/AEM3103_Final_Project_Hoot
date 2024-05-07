@@ -4,7 +4,10 @@ Final Project: AEM 3103 Spring 2024
 By: Zach Hoot
 
 ## Summary of Findings
+ -![Variable Variation Table](https://github.com/ZachHoot/AEM3103_Final_Project/blob/master/Figures/AEM3103_Variable_Variation_Table_(Final_Project).svg)
+
   - Variations Studied: Case A was the general case were velocity and flight angle were varried within the given min/max range supplied by the test condition. Case B was a study of the variation resulting in a flight path angle of 0 radians and the velocity varrying within the same range as in Case A. Case C was to test changes resulting from taking the same conditions as case A and increasing the velocity 50%. Case D was similar to case C but instead of increasing the velocity 50%, it was increased 200% to better gauge the extreme case of what would occur should the velocity be significantly higher than the pre calculated ideal flight angle and velocity for maximum range.
+    
   - Summary of findings:
     - Case A produced just about the expected results for ideal conditions. The nominal case was calculated to be the ideal conditions for range flight and as predicted by the math, it flew in a straight line descending at a constant speed and with a constant flight path angle. The minimum and maximum conditions caused changes in the glide profile of the airplane shown as undulations in the flight path compared to the straight line shown in the nominal case. The undualtions suggest that the plane was not in a static equilibrium state and would then be expected to have varrying velocity and flight path angle throughout the flight to attempt to gain static equilibrium which as shown in the time derivative graphs was not achieved in the 6 second trials. Lastly for case A, it is visable in the Monte-Carlo variation graph that the trials closest to the nominal case flew with the straigtest (ideal) flight path and the trials that fell closer to either extreme would either descend much faster with some oscilation and reach a similar range to the nominal case or would osilate upward drastically and not glide nearly as far.
 
